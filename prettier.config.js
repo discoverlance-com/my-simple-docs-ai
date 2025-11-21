@@ -24,7 +24,7 @@ export default {
 
   tailwindAttributes: ["class", "className", "ngClass", ".*[cC]lassName"],
   tailwindFunctions: ["clsx", "cn"],
-  tailwindStylesheet: "./src/index.css",
+  tailwindStylesheet: "./src/styles.css",
 
   overrides: [
     {
