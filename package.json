@@ -10,6 +10,7 @@
     "format": "prettier --write \"./src/**/*.{ts,tsx,mdx}\" --cache",
     "format:check": "prettier --check \"./src/**/*.{ts,tsx,mdx}\" --cache",
     "serve": "vite preview",
+    "start": "node .output/server/index.mjs",
     "test": "vitest run"
   },
   "dependencies": {

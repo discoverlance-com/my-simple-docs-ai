@@ -29,7 +29,7 @@ export function ChatInterface({ fileName }: ChatInterfaceProps) {
 	const [isLoading, setIsLoading] = useState(false)
 	const messagesEndRef = useRef<HTMLDivElement>(null)
 
-	const {aiName} = routeApi.useLoaderData()
+	const { aiName } = routeApi.useLoaderData()
 
 	const askAI = useServerFn(askMyAIDocsServerFn)
 
@@ -106,7 +106,8 @@ export function ChatInterface({ fileName }: ChatInterfaceProps) {
 				{messages.length === 0 && !fileName && (
 					<div className="flex h-full items-center justify-center">
 						<p className="text-center text-muted-foreground">
-              Hello, I am {aiName}. Please upload a document to start asking questions
+							Hello, I am {aiName}. Please upload a document to start asking
+							questions
 						</p>
 					</div>
 				)}

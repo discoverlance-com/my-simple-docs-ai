@@ -61,7 +61,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 						]}
 					/>
 				)}
-				<Toaster duration={3500} position="top-right" />
+				<Toaster duration={3500} position="top-right" closeButton />
 				<Scripts />
 			</body>
 		</html>

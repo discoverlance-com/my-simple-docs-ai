@@ -16,6 +16,12 @@ import { LoaderIcon, TrashIcon } from 'lucide-react'
 
 const deleteAllFilesServerFn = createServerFn({ method: 'POST' }).handler(
 	async () => {
+		if (!process.env.GEMINI_API_KEY) {
+			throw new Error(
+				'Please add your GEMINI_API_KEY to your environment variable',
+			)
+		}
+
 		const ai = new GoogleGenAI({
 			vertexai: false,
 			apiKey: process.env.GEMINI_API_KEY,
@@ -30,11 +36,11 @@ const deleteAllFilesServerFn = createServerFn({ method: 'POST' }).handler(
 )
 
 export const Route = createFileRoute('/')({
-  async loader() {
-    return {
-      aiName: process.env.AI_NAME ?? 'Not Known'
-    }
-  },
+	async loader() {
+		return {
+			aiName: process.env.AI_NAME ?? 'Not Known',
+		}
+	},
 	component: App,
 })
 
@@ -115,7 +121,13 @@ function App() {
 								variant="destructive"
 								onClick={async () => {
 									setDeleting(true)
-									await deleteFiles()
+									try {
+										await deleteFiles()
+									} catch (error) {
+										toast.error((error as Error).message)
+										setDeleting(false)
+										return
+									}
 									toast.success('Deleted all Files')
 									setDeleting(false)
 									setTimeout(() => {
