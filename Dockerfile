@@ -1,21 +1,28 @@
-# Stage 1: Build static files
+# Stage 1: Build
 FROM node:22 AS builder
 
 WORKDIR /app
+
+# Copy package files and install dependencies
+COPY package*.json ./
+RUN npm install
+
+# Copy the rest of the source code
 COPY . .
 
-# Install dependencies and build
-RUN npm install && npm run build
+# Build the app (generates .output)
+RUN npm run build
 
-# Stage 2: Serve with nginx
-FROM nginx:alpine
+# Stage 2: Production image
+FROM node:22
 
-# Remove default nginx static files
-RUN rm -rf /usr/share/nginx/html/*
+WORKDIR /app
 
-# Copy built static files from builder
-COPY --from=builder /app/dist /usr/share/nginx/html
+# Copy built output
+COPY --from=builder /app/.output /app/.output
 
-EXPOSE 8080
+WORKDIR /app
 
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 3000
+
+CMD ["node", "./.output/server/index.mjs"]
