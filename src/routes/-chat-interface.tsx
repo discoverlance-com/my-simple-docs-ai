@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input'
 import { toast } from 'sonner'
 import { askMyAIDocsServerFn } from '@/lib/query-ai'
 import { useServerFn } from '@tanstack/react-start'
+import { getRouteApi } from '@tanstack/react-router'
 
 interface Message {
 	id: string
@@ -20,11 +21,15 @@ interface ChatInterfaceProps {
 	fileName?: string
 }
 
+const routeApi = getRouteApi('/')
+
 export function ChatInterface({ fileName }: ChatInterfaceProps) {
 	const [messages, setMessages] = useState<Message[]>([])
 	const [input, setInput] = useState('')
 	const [isLoading, setIsLoading] = useState(false)
 	const messagesEndRef = useRef<HTMLDivElement>(null)
+
+	const {aiName} = routeApi.useLoaderData()
 
 	const askAI = useServerFn(askMyAIDocsServerFn)
 
@@ -101,7 +106,7 @@ export function ChatInterface({ fileName }: ChatInterfaceProps) {
 				{messages.length === 0 && !fileName && (
 					<div className="flex h-full items-center justify-center">
 						<p className="text-center text-muted-foreground">
-							Upload a document to start asking questions
+              Hello, I am {aiName}. Please upload a document to start asking questions
 						</p>
 					</div>
 				)}

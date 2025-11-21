@@ -30,6 +30,11 @@ const deleteAllFilesServerFn = createServerFn({ method: 'POST' }).handler(
 )
 
 export const Route = createFileRoute('/')({
+  async loader() {
+    return {
+      aiName: process.env.AI_NAME ?? 'Not Known'
+    }
+  },
 	component: App,
 })
 
