@@ -5,10 +5,15 @@
   "scripts": {
     "dev": "vite dev --port 3000",
     "build": "vite build",
+    "lint": "eslint . --cache",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"./src/**/*.{ts,tsx,mdx}\" --cache",
+    "format:check": "prettier --check \"./src/**/*.{ts,tsx,mdx}\" --cache",
     "serve": "vite preview",
     "test": "vitest run"
   },
   "dependencies": {
+    "@google/genai": "^1.30.0",
     "@radix-ui/react-label": "^2.1.8",
     "@radix-ui/react-slot": "^1.2.4",
     "@tailwindcss/vite": "^4.0.6",
@@ -25,10 +30,12 @@
     "nitro": "latest",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-dropzone": "^14.3.8",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.4.0",
     "tailwindcss": "^4.0.6",
-    "vite-tsconfig-paths": "^5.1.4"
+    "vite-tsconfig-paths": "^5.1.4",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@tanstack/devtools-vite": "^0.3.11",
